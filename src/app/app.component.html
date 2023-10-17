@@ -1,38 +1,48 @@
-<p>Entrer votre nom et votre age.</p>
-<p>Vous devez avoir entre 10 ans et 110 ans pour vous inscrire.</p>
+<div class="page">
+  <h1>Entrer votre nom et votre age.</h1>
+  <p>Vous devez avoir entre 10 ans et 110 ans pour vous inscrire.</p>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div>
-    <span>Nom: </span
-    ><input
-      name="name"
-      type="text"
-      formControlName="name"
-      [ngClass]="{
-        'border-red': showNameRequiredError()
-      }"
-    />
+    <form
+      #formDirective="ngForm"
+      class="form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input
+          matInput
+          placeholder="nom"
+          name="name"
+          type="text"
+          formControlName="name"
+        />
+        <mat-error *ngIf="showNameRequiredError()">Entrer votre nom</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Âge</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="age"
+          name="âge"
+          type="text"
+          formControlName="age"
+        />
+        <mat-error *ngIf="showAgeRequiredError()">Entrer votre âge</mat-error>
+        <mat-error *ngIf="showAgeMinError()"
+          >Votre age devrait être supérieur à 10</mat-error
+        >
+        <mat-error *ngIf="showAgeMaxError()"
+          >Votre age devrait être inférieur à 110</mat-error
+        >
+        <mat-error *ngIf="showAgePatternError()"
+          >Entrer un nombre valide</mat-error
+        >
+      </mat-form-field>
+
+      <button mat-raised-button type="submit">Soumettre</button>
+    </form>
   </div>
-  <div>
-    <span>Age: </span
-    ><input
-      name="age"
-      type="number"
-      formControlName="age"
-      [ngClass]="{
-        'border-red':
-          showAgeRequiredError() || showAgeMinError() || showAgeMaxError()
-      }"
-    />
-  </div>
-  <br />
-  <div *ngIf="showNameRequiredError()" class="text-red">Entrer un nom</div>
-  <div *ngIf="showAgeRequiredError()" class="text-red">Entrer votre age</div>
-  <div *ngIf="showAgeMinError()" class="text-red">
-    Votre age devrait être supérieur à 10
-  </div>
-  <div *ngIf="showAgeMaxError()" class="text-red">
-    Votre age devrait être inférieur à 110
-  </div>
-  <button type="submit">Soumettre</button>
-</form>
+</div>

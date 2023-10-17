@@ -1,7 +1,18 @@
-.text-red {
-  color: crimson;
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.border-red {
-  border-color: crimson;
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30rem;
+}
+
+mat-form-field {
+  width: 100%;
 }
